@@ -1,0 +1,13 @@
+.dunit-item {
+	display: flex;
+	/* justify-content: space-between; */
+}
+
+.icon {
+	height: 100%;
+}
+
+.dunit-text {
+	font-size: 20px;
+	width: 50%;
+}
