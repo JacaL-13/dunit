@@ -1,13 +1,17 @@
 import './Item.css'
 import 'react-accessible-accordion/dist/fancy-example.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { BsFillCalendarFill } from 'react-icons/bs'
 
-function Item(props) {
-	const [txtItem, setTxtItem] = useState('An Item')
+import { devData } from '../../data/devData'
 
+function Item(props) {
+	const [item, setItem] = useState(devData.find((item) => item.itemId === props.itemId))
+
+	console.log(item)
+	
 	return (
 		<div className="dunit-item">
 			<div
@@ -15,19 +19,20 @@ function Item(props) {
 				contentEditable
 				suppressContentEditableWarning
 				onKeyDown={(eve) => {
-					console.log(eve.key)
 					if (eve.key === 'Enter') {
 						eve.preventDefault()
 						document.activeElement.blur()
 					}
 				}}
 				onBlur={(eve) => {
-					setTxtItem(eve.target.textContent)
+					setItem((prev) => {
+						return { ...prev, textContent: eve.target.textContent }
+					})
 				}}
 			>
-				{txtItem}
+				{item.textContent}
 			</div>
-			<BsFillCalendarFill size={25}/>
+			<BsFillCalendarFill size={25} />
 		</div>
 	)
 }
