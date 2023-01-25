@@ -13,8 +13,8 @@ module.exports = {
             })
             res.status(200).send(items)
         } catch (error) {
-            console.log('ERROR IN getAllItems')
-            console.log(error)
+            console.error('ERROR IN getAllItems')
+            console.error(error)
             res.sendStatus(400)
         }
 	}

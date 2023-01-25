@@ -5,12 +5,8 @@ import { useState, useEffect } from 'react'
 
 import { BsFillCalendarFill } from 'react-icons/bs'
 
-import { devData } from '../../data/devData'
-
 function Item(props) {
-	const [item, setItem] = useState(devData.find((item) => item.itemId === props.itemId))
-
-	console.log(item)
+	const [item, setItem] = useState(props.thisItem)
 	
 	return (
 		<div className="dunit-item">
@@ -32,7 +28,6 @@ function Item(props) {
 			>
 				{item.textContent}
 			</div>
-			<BsFillCalendarFill size={25} />
 		</div>
 	)
 }

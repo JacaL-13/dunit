@@ -34,7 +34,7 @@ sequelize
 		seedDatabase()
 		app.listen(PORT, () => console.log(`Database seeded. Server running on port ${PORT}`))
 	})
-	.catch((err) => console.log(err))
+	.catch((err) => console.error(err))
 } else {
 	app.listen(PORT, () => console.log(`server running on port ${PORT}`))
 }
