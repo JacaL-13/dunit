@@ -1,0 +1,12 @@
+.main {
+	width: 1200px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+hr.solid {
+	border-top: 2px solid hsla(0, 0%, 0%, 0.185);
+	margin: 30px;
+}

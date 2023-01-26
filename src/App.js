@@ -1,20 +1,41 @@
 import './App.css'
 
-import { Route, Routes } from 'react-router';
-import { selectItems } from './redux/slices/itemsSlice';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Route, Routes } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearItems, setItems, selectItems } from './redux/slices/itemsSlice'
+import { clearCurParent, setCurParent } from './redux/slices/curParentSlice'
 
-import Parent from './Components/items/Parent';
+import Parent from './Components/Parent/Parent'
 
 function App() {
-  return (
-    <div className="app">
-      <Routes>
-        <Route index element={<Parent />} />
-        <Route path='/:itemid' element={<Parent />} />
-      </Routes>
-    </div>
-  );
+	const [isLoading, setLoading] = useState(true)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		axios
+			.get('http://localhost:3000/items')
+			.then((res) => {
+				dispatch(clearItems())
+				dispatch(setItems(res.data))
+				setLoading(false)
+			})
+			.catch((err) => console.error(err))
+	}, [dispatch])
+
+	if (isLoading) {
+		return <div className="App">Loading...</div>
+	}
+
+	return (
+		<div className="app">
+			<Routes>
+				<Route index element={<Parent curParentId={null} />} />
+				<Route path="/:itemid" element={<Parent curParentId={window.location.pathname} />} />
+			</Routes>
+		</div>
+	)
 }
 
-export default App;
+export default App

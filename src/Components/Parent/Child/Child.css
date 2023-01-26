@@ -1,0 +1,19 @@
+.child {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	column-gap: 10px;
+}
+
+.item-bar {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	column-gap: 10px;
+	border: 1px solid black;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}

@@ -13,15 +13,15 @@ app.use(cors())
 
 Item.hasMany(Item, { foreignKey: 'parentId' })
 
-const {getAllItems} = require('./controllers/ctlItems')
+const {getAllItems, updateItem} = require('./controllers/ctlItems')
 
 app.get('/items', getAllItems)
+app.put('/items/', updateItem)
 
 // app.post('/register', register)
 // app.post('/login', login)
 // app.get('/userposts/:userId', getCurrentUserPosts)
 // app.post('/posts', isAuthenticated, addPost)
-// app.put('/posts/:id', isAuthenticated, editPost)
 // app.delete('/posts/:id', isAuthenticated, deletePost)
 
 const {seedDatabase} = require('./utils/dataSeed')

@@ -16,13 +16,22 @@ export const itemsSlice = createSlice({
 		setItems: (state, action) => {
 			state.value = action.payload
 		},
-		clearItems: (state) => {
+		clearItems: (state, action) => {
 			state.value = null
+		},
+		updateItem: (state, action) => {
+			const idx = state.value.findIndex((item) => item.itemId === action.payload.itemId)
+			const updArr = [...state.value]
+			updArr.splice(idx, 1, action.payload)
+			return {
+				...state,
+				value: updArr
+			}
 		}
 	}
 })
 
-export const {setItems, clearItems} = itemsSlice.actions
+export const {setItems, clearItems, updateItem} = itemsSlice.actions
 
 export const selectItems = (state) => state.items.value
 
