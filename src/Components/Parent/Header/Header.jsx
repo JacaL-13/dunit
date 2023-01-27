@@ -1,7 +1,6 @@
 import './Header.css'
 
-import { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectItems } from '../../../redux/slices/itemsSlice'
 
@@ -45,12 +44,9 @@ function Header(props) {
 
 	return (
 		<header>
-			<ul className="breadcrumb" key='breadcrumb'>
+			<ul className="breadcrumb" key="breadcrumb">
 				<li className={curParent ? 'bread-item' : null}>
-					<Link
-						key="home"
-						to='/'
-					>
+					<Link key="home" to="/">
 						Home
 					</Link>
 				</li>

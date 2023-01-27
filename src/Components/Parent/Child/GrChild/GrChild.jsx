@@ -1,7 +1,7 @@
 import './GrChild.css'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { selectItems, delItem } from '../../../../redux/slices/itemsSlice'
+import { useDispatch } from 'react-redux'
+import { delItem } from '../../../../redux/slices/itemsSlice'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -9,16 +9,16 @@ import { FaChevronRight, FaTrashAlt } from 'react-icons/fa'
 
 import Item from '../../../items/Item'
 
-function GrChild(props) {
-	const items = useSelector(selectItems)
+const { REACT_APP_SERVER_PORT } = process.env
 
+function GrChild(props) {
 	const { thisItem, idx } = props
 
 	const dispatch = useDispatch()
 
 	function hdlDelete(eve) {
 		dispatch(delItem(thisItem.itemId))
-		axios.delete(`http://localhost:3000/items/${thisItem.itemId}`)
+		axios.delete(`http://localhost:${REACT_APP_SERVER_PORT}/items/${thisItem.itemId}`)
 	}
 
 	return (
@@ -27,9 +27,9 @@ function GrChild(props) {
 			<div className="gr-child">
 				<Item thisItem={thisItem} parentPlus={props.parentPlus} />
 				<div className="chev-con">
-						<Link to={`/${thisItem.parentId}/${idx}`}>
-							<FaChevronRight size={25} />
-						</Link>
+					<Link to={`/${thisItem.parentId}/${idx}`}>
+						<FaChevronRight size={25} />
+					</Link>
 				</div>
 			</div>
 		</div>

@@ -8,6 +8,8 @@ import { updateItem, selectItems } from '../../redux/slices/itemsSlice'
 import axios from 'axios'
 import DatePicker from 'react-date-picker'
 
+const { REACT_APP_SERVER_PORT } = process.env
+
 function Item(props) {
 	const [item, setItem] = useState(props.thisItem)
 	const [startDt, setStartDt] = useState(() => {
@@ -44,7 +46,7 @@ function Item(props) {
 			)
 		) {
 			dispatch(updateItem(item))
-			axios.put('http://localhost:3000/items', item)
+			axios.put(`http://localhost:${REACT_APP_SERVER_PORT}/items`, item)
 		} else {
 		}
 	}, [item, items, dispatch])
@@ -58,11 +60,14 @@ function Item(props) {
 		}
 	}
 
-	const focusNew = useCallback((itemText) => {
-		if(itemText && item.newItem) {
-			itemText.focus()
-		}
-	}, [item.newItem])
+	const focusNew = useCallback(
+		(itemText) => {
+			if (itemText && item.newItem) {
+				itemText.focus()
+			}
+		},
+		[item.newItem]
+	)
 
 	return (
 		<div className="dunit-item">

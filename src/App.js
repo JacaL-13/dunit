@@ -3,19 +3,21 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Route, Routes } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
-import { clearItems, setItems, selectItems } from './redux/slices/itemsSlice'
-import { clearCurParent, setCurParent } from './redux/slices/curParentSlice'
+import { useDispatch } from 'react-redux'
+import { clearItems, setItems } from './redux/slices/itemsSlice'
 
 import Parent from './Components/Parent/Parent'
+
+const { REACT_APP_SERVER_PORT } = process.env
 
 function App() {
 	const [isLoading, setLoading] = useState(true)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		console.log(`http://localhost:${REACT_APP_SERVER_PORT}/items`)
 		axios
-			.get('http://localhost:3000/items')
+			.get(`http://localhost:${REACT_APP_SERVER_PORT}/items`)
 			.then((res) => {
 				dispatch(clearItems())
 				dispatch(setItems(res.data))

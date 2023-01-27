@@ -14,12 +14,3 @@ module.exports = {
 		passhash: DataTypes.STRING
 	})
 }
-
-// reference: 'parent1',
-// 			itemId: '47741334-d1fd-4806-944b-006834300cd4',
-// 			parentId: null,
-// 			textContent: 'This is a parent item.',
-// 			startDate: null,
-// 			endDate: null,
-// 			hasChldrn: true,
-// 			dun: false

@@ -12,6 +12,8 @@ import axios from 'axios'
 import Item from '../../items/Item'
 import GrChild from './GrChild/GrChild'
 
+const { REACT_APP_SERVER_PORT } = process.env
+
 function Child(props) {
 	const [expand, setExpand] = useState(props.expanded) //future goal, expanded is a value from db so it remembers what the user had open. That way if you hit back it doesn't close everything.
 	const items = useSelector(selectItems)
@@ -31,17 +33,15 @@ function Child(props) {
 			return <GrChild thisItem={val} key={`item${val.itemId}`} idx={idx} parentPlus={hdlPlusClick} />
 		})
 
-	const hasChild = dispItems.length > 0
-
 	function hdlPlusClick(eve) {
 		const newItem = { newId: uuidv4(), parentId: thisItem.itemId }
 		dispatch(addItem(newItem))
-		axios.post('http://localhost:3000/items', newItem)
+		axios.post(`http://localhost:${REACT_APP_SERVER_PORT}/items`, newItem)
 	}
 
 	function hdlDelete(eve) {
 		dispatch(delItem(thisItem.itemId))
-		axios.delete(`http://localhost:3000/items/${thisItem.itemId}`)
+		axios.delete(`http://localhost:${REACT_APP_SERVER_PORT}/items/${thisItem.itemId}`)
 	}
 
 	return (

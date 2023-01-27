@@ -1,18 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import { createSlice } from '@reduxjs/toolkit'
 
 export const itemsSlice = createSlice({
 	name: 'items',
 	initialState: {
-		value: [{
-			itemId: 'b334acaa-34e3-495a-9e88-aabfa4b63cf9',
-			parentId: null,
-			textContent: 'Create your first item!',
-			startDate: null,
-			endDate: null,
-			dun: false,
-			newItem: false
-		}]
+		value: [
+			{
+				itemId: 'b334acaa-34e3-495a-9e88-aabfa4b63cf9',
+				parentId: null,
+				textContent: 'Create your first item!',
+				startDate: null,
+				endDate: null,
+				dun: false,
+				newItem: false
+			}
+		]
 	},
 	reducers: {
 		setItems: (state, action) => {
@@ -31,18 +32,21 @@ export const itemsSlice = createSlice({
 			}
 		},
 		addItem: (state, action) => {
-			const {newId, parentId} = action.payload
+			const { newId, parentId } = action.payload
 			return {
 				...state,
-				value: [...state.value, {
-					itemId: newId,
-					parentId: parentId,
-					textContent: '',
-					startDate: null,
-					endDate: null,
-					dun: false,
-					newItem: true
-				}]
+				value: [
+					...state.value,
+					{
+						itemId: newId,
+						parentId: parentId,
+						textContent: '',
+						startDate: null,
+						endDate: null,
+						dun: false,
+						newItem: true
+					}
+				]
 			}
 		},
 		delItem: (state, action) => {
@@ -57,7 +61,7 @@ export const itemsSlice = createSlice({
 	}
 })
 
-export const {setItems, clearItems, updateItem, addItem, delItem} = itemsSlice.actions
+export const { setItems, clearItems, updateItem, addItem, delItem } = itemsSlice.actions
 
 export const selectItems = (state) => state.items.value
 

@@ -1,19 +1,5 @@
 const { Item } = require('../models/modItems')
 
-// Item: sequelize.define('items', {
-// 	itemId: {
-// 		type: UUID,
-// 		defaultValue: UUIDV4,
-// 		allowNull: false,
-// 		primaryKey: true
-// 	},
-// 	parentId: DataTypes.UUID,
-// 	textContent: DataTypes.STRING,
-// 	startDate: DataTypes.DATE,
-// 	endDate: DataTypes.DATE,
-// 	dun: DataTypes.BOOLEAN
-// })
-
 module.exports = {
 	seedDatabase: () => {
 		const devData = [
@@ -91,7 +77,7 @@ module.exports = {
 
 		try {
 			for (let i = 0; i < devData.length; i++) {
-				const {itemId, parentId, textContent, startDate, endDate, dun } = devData[i]
+				const { itemId, parentId, textContent, startDate, endDate, dun } = devData[i]
 
 				Item.create({
 					itemId,
