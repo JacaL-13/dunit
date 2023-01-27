@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 export const itemsSlice = createSlice({
 	name: 'items',
@@ -9,7 +10,8 @@ export const itemsSlice = createSlice({
 			textContent: 'Create your first item!',
 			startDate: null,
 			endDate: null,
-			dun: false
+			dun: false,
+			newItem: false
 		}]
 	},
 	reducers: {
@@ -27,11 +29,35 @@ export const itemsSlice = createSlice({
 				...state,
 				value: updArr
 			}
+		},
+		addItem: (state, action) => {
+			const {newId, parentId} = action.payload
+			return {
+				...state,
+				value: [...state.value, {
+					itemId: newId,
+					parentId: parentId,
+					textContent: '',
+					startDate: null,
+					endDate: null,
+					dun: false,
+					newItem: true
+				}]
+			}
+		},
+		delItem: (state, action) => {
+			const idx = state.value.findIndex((item) => item.itemId === action.payload)
+			const updArr = [...state.value]
+			updArr.splice(idx, 1)
+			return {
+				...state,
+				value: updArr
+			}
 		}
 	}
 })
 
-export const {setItems, clearItems, updateItem} = itemsSlice.actions
+export const {setItems, clearItems, updateItem, addItem, delItem} = itemsSlice.actions
 
 export const selectItems = (state) => state.items.value
 

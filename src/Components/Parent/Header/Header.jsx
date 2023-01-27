@@ -33,7 +33,7 @@ function Header(props) {
 		if (val.itemId !== curParentId) {
 			return (
 				<li className="bread-item">
-					<Link to={`/${val.itemId}`} key={`item${val.itemId}`}>
+					<Link to={`/${val.itemId}/u`} key={`item${val.itemId}`}>
 						{val.textContent}
 					</Link>
 				</li>
@@ -45,7 +45,7 @@ function Header(props) {
 
 	return (
 		<header>
-			<ul className="breadcrumb">
+			<ul className="breadcrumb" key='breadcrumb'>
 				<li className={curParent ? 'bread-item' : null}>
 					<Link
 						key="home"

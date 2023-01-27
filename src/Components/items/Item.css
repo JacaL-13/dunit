@@ -1,12 +1,14 @@
 .dunit-item {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	width: 100%;
 }
 
 .dunit-text {
-	/* min-width: 500px; */
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	width: 450px;
+	overflow-y: auto;
 }
 
 .dates {
@@ -17,38 +19,37 @@
 label {
 	display: flex;
 	column-gap: 5px;
-	align-items: center;
 }
 
-.react-date-picker__calendar--open, .react-date-picker__calendar--closed {
+.react-date-picker {
+	height: 35px;
+}
+
+.react-date-picker__calendar--open,
+.react-date-picker__calendar--closed {
 	position: absolute;
 }
 
-
- /* Customize the label (the container) */
- .container {
+.container {
 	display: block;
 	position: relative;
 	cursor: pointer;
 	font-size: 22px;
-	margin-top: 2px;
-	margin-right: 10px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
+	height: 25px;
+}
+
+.container input {
 	opacity: 0;
-	cursor:auto;
+	cursor: auto;
 	height: 0;
 	width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
+}
+
+.checkmark {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -56,39 +57,34 @@ label {
 	width: 25px;
 	background-color: #eee;
 	border: 1px solid black;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+}
+
+.container:hover input ~ .checkmark {
 	background-color: #ccc;
-  }
-  
-  /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
-	background-color: #2196F3;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-	content: "";
+}
+
+.container input:checked ~ .checkmark {
+	background-color: #2196f3;
+}
+
+.checkmark:after {
+	content: '';
 	position: absolute;
 	display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+}
+
+.container input:checked ~ .checkmark:after {
 	display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
+}
+
+.container .checkmark:after {
 	left: 9px;
 	top: 5px;
 	width: 5px;
 	height: 10px;
-	border: solid white;
+	border: solid black;
 	border-width: 0 3px 3px 0;
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
-  } 
+}

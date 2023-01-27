@@ -1,10 +1,10 @@
 import './Item.css'
 import 'react-accessible-accordion/dist/fancy-example.css'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
-import { useDispatch } from 'react-redux'
-import { updateItem } from '../../redux/slices/itemsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateItem, selectItems } from '../../redux/slices/itemsSlice'
 import axios from 'axios'
 import DatePicker from 'react-date-picker'
 
@@ -16,6 +16,10 @@ function Item(props) {
 	const [endDt, setEndDt] = useState(() => {
 		return props.thisItem.endDate === null ? null : new Date(props.thisItem.endDate)
 	})
+
+	const items = useSelector(selectItems)
+
+	const { setExpand } = props
 
 	const dispatch = useDispatch()
 
@@ -30,9 +34,35 @@ function Item(props) {
 	}, [startDt, endDt])
 
 	useEffect(() => {
-		dispatch(updateItem(item))
-		axios.put('http://localhost:3000/items', item)
-	}, [item, dispatch])
+		const curItem = items.find(({ itemId }) => itemId === item.itemId)
+		if (
+			!(
+				curItem.textContent === item.textContent &&
+				curItem.startDate === item.startDate &&
+				curItem.endDate === item.endDate &&
+				curItem.dun === item.dun
+			)
+		) {
+			dispatch(updateItem(item))
+			axios.put('http://localhost:3000/items', item)
+		} else {
+		}
+	}, [item, items, dispatch])
+
+	function hdlDunChng(eve) {
+		setItem((prev) => {
+			return { ...prev, dun: eve.target.checked }
+		})
+		if (setExpand && eve.target.checked) {
+			setExpand(false)
+		}
+	}
+
+	const focusNew = useCallback((itemText) => {
+		if(itemText && item.newItem) {
+			itemText.focus()
+		}
+	}, [item.newItem])
 
 	return (
 		<div className="dunit-item">
@@ -44,6 +74,7 @@ function Item(props) {
 					if (eve.key === 'Enter') {
 						eve.preventDefault()
 						document.activeElement.blur()
+						props.parentPlus(eve)
 					}
 				}}
 				onBlur={(eve) => {
@@ -51,6 +82,7 @@ function Item(props) {
 						return { ...prev, textContent: eve.target.textContent }
 					})
 				}}
+				ref={focusNew}
 			>
 				{item.textContent}
 			</div>
@@ -66,7 +98,7 @@ function Item(props) {
 					/>
 				</label>
 				<label>
-					End Date
+					Due Date
 					<DatePicker
 						className="date-picker"
 						onChange={(eve) => {
@@ -77,11 +109,7 @@ function Item(props) {
 				</label>
 			</div>
 			<label className="container">
-				<input type="checkbox" checked={item.dun} onChange={(eve) => {
-					setItem((prev) => {
-						return { ...prev, dun: eve.target.checked }
-					})
-				}}/>
+				<input type="checkbox" checked={item.dun} onChange={hdlDunChng} />
 				<span className="checkmark"></span>
 			</label>
 		</div>

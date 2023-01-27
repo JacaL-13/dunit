@@ -32,7 +32,7 @@ function App() {
 		<div className="app">
 			<Routes>
 				<Route index element={<Parent curParentId={null} />} />
-				<Route path="/:itemid" element={<Parent curParentId={window.location.pathname} />} />
+				<Route path="/:curParentId/:expanded" element={<Parent curParentId={window.location.pathname} />} />
 			</Routes>
 		</div>
 	)

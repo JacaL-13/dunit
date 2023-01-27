@@ -13,19 +13,19 @@ app.use(cors())
 
 Item.hasMany(Item, { foreignKey: 'parentId' })
 
-const {getAllItems, updateItem} = require('./controllers/ctlItems')
+const {getAllItems, updateItem, addItem, delItem} = require('./controllers/ctlItems')
 
 app.get('/items', getAllItems)
 app.put('/items/', updateItem)
+app.post('/items', addItem)
+app.delete('/items/:itemid', delItem)
 
 // app.post('/register', register)
 // app.post('/login', login)
 // app.get('/userposts/:userId', getCurrentUserPosts)
-// app.post('/posts', isAuthenticated, addPost)
-// app.delete('/posts/:id', isAuthenticated, deletePost)
 
 const {seedDatabase} = require('./utils/dataSeed')
-const seed = false
+const seed = true
 
 if (seed) {
 sequelize

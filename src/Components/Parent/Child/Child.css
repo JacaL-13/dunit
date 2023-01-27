@@ -1,7 +1,17 @@
+.child-wrapper {
+	display: flex;
+	column-gap: 10px;
+	margin-left: 5px;
+}
+
+.del-btn {
+	margin-top: 10px;
+}
+
 .child {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
 	width: 100%;
 	column-gap: 10px;
 }
@@ -10,10 +20,24 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	column-gap: 10px;
+	column-gap: 40px;
 	border: 1px solid black;
+	box-sizing: border-box;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 15px;
-	padding-right: 15px;
+	padding-right: 5px;
+}
+
+.expanded {
+	background-color: #d6d6d6;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
 }

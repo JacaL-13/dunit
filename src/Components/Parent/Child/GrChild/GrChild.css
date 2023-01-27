@@ -1,0 +1,17 @@
+.gr-child {
+	display: flex;
+	justify-content: space-between;
+	column-gap: 40px;
+	font-size: 18px;
+	width: 95%;
+	border: 1px solid black;
+	box-sizing: border-box;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 5px;
+}
+
+.gr-child .react-date-picker {
+	height: 30px;
+}

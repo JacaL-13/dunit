@@ -4,6 +4,7 @@ module.exports = {
 	getAllItems: async (req, res) => {
 		try {
 			const items = await Item.findAll({
+				order: [['createdAt']]
 				// where: {userId: req.params},
 				// include: [{
 				//     model: User,
@@ -30,11 +31,32 @@ module.exports = {
 				},
 				{ where: { itemId: itemId } }
 			)
-            res.sendStatus(200)
+			res.sendStatus(200)
 		} catch (error) {
-            console.error('Error in updateItem');
-            console.error(error);
-            res.sendStatus(400)
-        }
+			console.error('Error in updateItem')
+			console.error(error)
+			res.sendStatus(400)
+		}
+	},
+	addItem: async (req, res) => {
+		try {
+			const { newId, parentId } = req.body
+			await Item.create({ itemId: newId, parentId, dun: false })
+			res.sendStatus(200)
+		} catch (error) {
+			console.error('Error in addItem')
+			console.error(error)
+			res.sendStatus(400)
+		}
+	},
+	delItem: async (req, res) => {
+		try {
+			await Item.destroy({ where: { itemId: req.params.itemid } })
+			res.sendStatus(200)
+		} catch (error) {
+			console.error('Error in delItem')
+			console.error(error)
+			res.sendStatus(400)
+		}
 	}
 }
