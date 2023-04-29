@@ -1,4 +1,5 @@
 import './GrChild.css'
+import '../Child.css'
 
 import { useDispatch } from 'react-redux'
 import { delItem } from '../../../../redux/slices/itemsSlice'

@@ -113,10 +113,17 @@ function Item(props) {
 					/>
 				</label>
 			</div>
-			<label className="container">
-				<input type="checkbox" checked={item.dun} onChange={hdlDunChng} />
-				<span className="checkmark"></span>
-			</label>
+			<div className="checkbox-container">
+				<input
+					type="checkbox"
+					id={"custom-checkbox" + item.itemId}
+					className="custom-checkbox"
+					checked={item.dun}
+					onChange={hdlDunChng}
+				/>
+				<label htmlFor={"custom-checkbox" + item.itemId} className="checkbox-label"></label>
+				<span className="checkbox-text"></span>
+			</div>
 		</div>
 	)
 }

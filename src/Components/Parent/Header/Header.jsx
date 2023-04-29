@@ -31,10 +31,8 @@ function Header(props) {
 	const dispPath = pathArr.reverse().map((val, idx) => {
 		if (val.itemId !== curParentId) {
 			return (
-				<li className="bread-item">
-					<Link to={`/${val.itemId}/u`} key={`item${val.itemId}`}>
-						{val.textContent}
-					</Link>
+				<li className="bread-item" key={`item${val.itemId}`}>
+					<Link to={`/${val.itemId}/u`}>{val.textContent}</Link>
 				</li>
 			)
 		} else {
@@ -45,10 +43,8 @@ function Header(props) {
 	return (
 		<header>
 			<ul className="breadcrumb" key="breadcrumb">
-				<li className={curParent ? 'bread-item' : null}>
-					<Link key="home" to="/">
-						Home
-					</Link>
+				<li className={curParent ? 'bread-item' : null} key="home">
+					<Link to="/">Home</Link>
 				</li>
 				{curParent ? dispPath : null}
 			</ul>
